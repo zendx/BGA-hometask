@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "node": "node src/index.js",
+    "lint": "node scripts/lint.js",
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage"

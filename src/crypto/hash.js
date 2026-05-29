@@ -1,15 +1,15 @@
-const { notImplemented } = require('../util/notImplemented');
+const crypto = require('node:crypto');
 /** @see tests/unit/crypto/hash.test.js */
 function sha256(data) {
-  notImplemented('sha256');
+  return crypto.createHash('sha256').update(String(data)).digest('hex');
 }
 
 function hashObject(obj) {
-  notImplemented('hashObject');
+  return sha256(JSON.stringify(obj));
 }
 
 function meetsDifficulty(hash, difficulty) {
-  notImplemented('meetsDifficulty');
+  return hash.startsWith('0'.repeat(difficulty));
 }
 
 module.exports = { sha256, hashObject, meetsDifficulty };

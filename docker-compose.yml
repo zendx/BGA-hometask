@@ -1,0 +1,12 @@
+services:
+  blockchain-node:
+    build:
+      context: .
+    environment:
+      PORT: "3001"
+      P2P_PORT: "6001"
+      DIFFICULTY: "2"
+    ports:
+      - "3001:3001"
+      - "6001:6001"
+    restart: unless-stopped

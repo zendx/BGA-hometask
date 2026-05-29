@@ -1,4 +1,3 @@
-const { notImplemented } = require('../util/notImplemented');
 /** @see tests/unit/core/UTXOSet.test.js */
 class UTXOSet {
   constructor() {
@@ -10,43 +9,58 @@ class UTXOSet {
   }
 
   add(tx) {
-    notImplemented('UTXOSet.add');
+    tx.outputs.forEach((output, outputIndex) => {
+      this.utxos.set(UTXOSet.key(tx.id, outputIndex), {
+        txId: tx.id,
+        outputIndex,
+        address: output.address,
+        amount: output.amount,
+      });
+    });
   }
 
   spend(tx) {
-    notImplemented('UTXOSet.spend');
+    if (tx.isCoinbase && tx.isCoinbase()) return;
+    tx.inputs.forEach((input) => {
+      this.utxos.delete(UTXOSet.key(input.txId, input.outputIndex));
+    });
   }
 
   applyTransaction(tx) {
-    notImplemented('UTXOSet.applyTransaction');
+    this.spend(tx);
+    this.add(tx);
   }
 
   applyBlock(transactions) {
-    notImplemented('UTXOSet.applyBlock');
+    transactions.forEach((tx) => this.applyTransaction(tx));
   }
 
   getBalance(address) {
-    notImplemented('UTXOSet.getBalance');
+    return this.getUnspentForAddress(address).reduce((sum, utxo) => sum + utxo.amount, 0);
   }
 
   getUnspentForAddress(address) {
-    notImplemented('UTXOSet.getUnspentForAddress');
+    return Array.from(this.utxos.values()).filter((utxo) => utxo.address === address);
   }
 
   has(txId, outputIndex) {
-    notImplemented('UTXOSet.has');
+    return this.utxos.has(UTXOSet.key(txId, outputIndex));
   }
 
   clone() {
-    notImplemented('UTXOSet.clone');
+    return UTXOSet.fromJSON(this.toJSON());
   }
 
   toJSON() {
-    notImplemented('UTXOSet.toJSON');
+    return Array.from(this.utxos.entries());
   }
 
   static fromJSON(entries) {
-    notImplemented('UTXOSet.fromJSON');
+    const set = new UTXOSet();
+    for (const [key, value] of entries || []) {
+      set.utxos.set(key, { ...value });
+    }
+    return set;
   }
 }
 
