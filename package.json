@@ -1,10 +1,10 @@
 {
   "name": "blockchain-hometask",
   "version": "1.0.0",
-  "description": "Advanced Node.js blockchain coding assessment — implement src/ until tests pass",
+  "description": "Advanced Node.js blockchain coding assessment \u2014 implement src/ until tests pass",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node init && node src/index.js",
     "node": "node src/index.js",
     "lint": "node scripts/lint.js",
     "test": "jest",
@@ -14,7 +14,12 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "keywords": ["blockchain", "utxo", "pow", "p2p"],
+  "keywords": [
+    "blockchain",
+    "utxo",
+    "pow",
+    "p2p"
+  ],
   "license": "MIT",
   "dependencies": {
     "ws": "^8.18.0"
