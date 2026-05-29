@@ -195,6 +195,13 @@ curl -X POST http://localhost:3001/mine
 curl http://localhost:3001/blocks
 ```
 
+## Candidate submission notes
+
+Architecture notes and operational runbook for the Senior DevOps Engineer track are included in:
+
+- `candidate/ARCHITECTURE.md`
+- `candidate/RUNBOOK.md`
+
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `PORT` | 3001 | HTTP API |
